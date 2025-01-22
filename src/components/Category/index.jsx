@@ -10,6 +10,7 @@ const CategoryContainer = styled.div`
   border-radius: 8px;
   align-items: center;
   gap: 20px;
+  background-color: yellow;  /* Solo para ver si se está renderizando */
 `;
 
 const CategoryTitle = styled.h2`
@@ -21,7 +22,9 @@ const CategoryTitle = styled.h2`
   text-align: center;
   width: 300px;
   border-radius: 10px;
+  background-color: blue;  /* Solo para ver si se está renderizando */
 `;
+
 
 const VideoList = styled.div`
   display: flex;

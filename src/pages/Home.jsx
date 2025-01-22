@@ -6,21 +6,25 @@ import Footer from '../components/Footer';
 import Modal from '../components/Modal/Modal';
 
 const Home = ({ categories }) => {
+  console.log(categories); // Verifica qué contiene categories
   return (
     <>
       {/* Banner */}
       <Banner categories={categories} />
       
       {/* Sección de Categorías */}
-      <div style={{ padding: '20px' , backgroundColor : 'red'}}> {/* Agregar separación entre el banner y las categorías */}
-        {categories.map((category) => (
-          <Category key={category.categoria} category={category} categories={categories} />
-        ))}AAAAAAAAAAAAAAAAAAAAA
+      <div style={{ padding: '20px', backgroundColor: 'red' }}>
+        {categories.length > 0 ? (
+          categories.map((category) => (
+            <Category key={category.categoria} category={category} categories={categories} />
+          ))
+        ) : (
+          <p>No hay categorías disponibles.</p>
+        )}
       </div>
 
       {/* Modal */}
       <Modal categories={categories} />
-
     </>
   );
 };
