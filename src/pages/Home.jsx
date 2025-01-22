@@ -14,7 +14,7 @@ const Home = ({ categories }) => {
       {/* Sección de Categorías */}
       <div style={{ padding: '20px' , backgroundColor : 'White'}}> {/* Agregar separación entre el banner y las categorías */}
         {categories.map((category) => (
-          <Category key={category.categoria} category={category} categories={categories} />
+          <Category key={categories.categoria} category={category} categories={categories} />
         ))}
       </div>
 
