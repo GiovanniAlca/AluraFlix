@@ -10,7 +10,6 @@ const CategoryContainer = styled.div`
   border-radius: 8px;
   align-items: center;
   gap: 20px;
-  background-color: yellow;  /* Solo para ver si se está renderizando */
 `;
 
 const CategoryTitle = styled.h2`

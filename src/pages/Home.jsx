@@ -14,7 +14,7 @@ const Home = ({ categories }) => {
       <Banner categories={categories} />
       
       {/* Sección de Categorías */}
-      <div style={{ padding: '20px', backgroundColor: 'red' }}>
+      <div >
         {categories.length > 0 ? (
           categories.map((category) => (
             <Category key={category.categoria} category={category} categories={categories} />
