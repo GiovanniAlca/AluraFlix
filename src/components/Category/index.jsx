@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import VideoCard from './VideoCard'; // Asegúrate de que VideoCard esté bien importado
-import bdData from '/public/data/bd.json'; // Ruta desde la raíz de la carpeta 'public'
 
 const CategoryContainer = styled.div`
   display: flex;
@@ -47,7 +46,15 @@ const Category = ({ category }) => {
 
   // Cargar datos desde bd.json
   useEffect(() => {
-    setVideoData(bdData); // Cargar los datos de bd.json en el estado
+    // Usamos fetch para cargar los datos desde la carpeta pública
+    fetch('/data/bd.json')
+      .then((response) => response.json()) // Convertir a JSON
+      .then((data) => {
+        setVideoData(data); // Establecer los datos cargados
+      })
+      .catch((error) => {
+        console.error('Error al cargar los datos:', error); // Manejo de errores
+      });
   }, []);
 
   return (
@@ -56,6 +63,7 @@ const Category = ({ category }) => {
         {category.categoria}
       </CategoryTitle>
       <VideoList>
+        {/* Verificar si category tiene videos y mapearlos */}
         {category.videos && category.videos.length > 0 ? (
           category.videos.map((video) => (
             <VideoCard key={video.id} video={video} />
