@@ -45,7 +45,7 @@ const Category = ({ category }) => {
   const [videoData, setVideoData] = useState([]);
 
   useEffect(() => {
-    fetch('data/bd.json')
+    fetch('/public/data/bd.json')
       .then((response) => response.json())
       .then((data) => {
         console.log('Datos cargados:', data);  // Verifica los datos cargados
