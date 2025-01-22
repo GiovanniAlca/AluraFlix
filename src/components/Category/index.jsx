@@ -44,18 +44,18 @@ const categoryBackground = (category) => {
 const Category = ({ category }) => {
   const [videoData, setVideoData] = useState([]);
 
-  // Cargar datos desde bd.json
   useEffect(() => {
-    // Usamos fetch para cargar los datos desde la carpeta pública
-    fetch('/data/bd.json')
-      .then((response) => response.json()) // Convertir a JSON
+    fetch('data/bd.json')
+      .then((response) => response.json())
       .then((data) => {
-        setVideoData(data); // Establecer los datos cargados
+        console.log('Datos cargados:', data);  // Verifica los datos cargados
+        setVideoData(data);
       })
       .catch((error) => {
-        console.error('Error al cargar los datos:', error); // Manejo de errores
+        console.error('Error al cargar los datos:', error);
       });
   }, []);
+  
 
   return (
     <CategoryContainer>
