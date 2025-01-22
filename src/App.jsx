@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     // Asegúrate de que la ruta al archivo 'bd.json' sea correcta
-    fetch('./public/data/bd.json') // La ruta al archivo JSON
+    fetch('/public/data/bd.json') // La ruta al archivo JSON
       .then(response => response.json()) // Convertir la respuesta en un objeto JSON
       .then(data => {
         //console.log("Datos de bd.json:", data);

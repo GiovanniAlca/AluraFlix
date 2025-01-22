@@ -45,16 +45,17 @@ const Category = ({ category }) => {
   const [videoData, setVideoData] = useState([]);
 
   useEffect(() => {
-    fetch('/public/data/bd.json')
+    fetch('/data/bd.json') // Asegúrate de que la ruta es correcta
       .then((response) => response.json())
       .then((data) => {
-        console.log('Datos cargados:', data);  // Verifica los datos cargados
+        console.log('Datos cargados:', data); // Verifica los datos cargados
         setVideoData(data);
       })
       .catch((error) => {
         console.error('Error al cargar los datos:', error);
       });
   }, []);
+  
   
 
   return (
@@ -65,12 +66,13 @@ const Category = ({ category }) => {
       <VideoList>
         {/* Verificar si category tiene videos y mapearlos */}
         {category.videos && category.videos.length > 0 ? (
-          category.videos.map((video) => (
-            <VideoCard key={video.id} video={video} />
-          ))
-        ) : (
-          <p>No hay videos disponibles.</p>
-        )}
+  category.videos.map((video) => (
+    <VideoCard key={video.id} video={video} />
+  ))
+) : (
+  <p>No hay videos disponibles.</p>
+)}
+
       </VideoList>
     </CategoryContainer>
   );
