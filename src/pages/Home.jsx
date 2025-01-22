@@ -12,10 +12,10 @@ const Home = ({ categories }) => {
       <Banner categories={categories} />
       
       {/* Sección de Categorías */}
-      <div style={{ padding: '20px' , backgroundColor : 'White'}}> {/* Agregar separación entre el banner y las categorías */}
+      <div style={{ padding: '20px' , backgroundColor : 'red'}}> {/* Agregar separación entre el banner y las categorías */}
         {categories.map((category) => (
-          <Category key={categories.categoria} category={category} categories={categories} />
-        ))}
+          <Category key={category.categoria} category={category} categories={categories} />
+        ))}AAAAAAAAAAAAAAAAAAAAA
       </div>
 
       {/* Modal */}
