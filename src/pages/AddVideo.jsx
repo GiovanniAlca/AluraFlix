@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Footer from '../components/Footer';
 
 // Para cargar las categorías desde el archivo JSON
-import categoriesData from '../../public/data/bd.json'; // Ajusta la ruta al archivo JSON
+import categoriesData from '/public/data/bd.json'; // Ajusta la ruta al archivo JSON
 
 const PageContainer = styled.div`
   background-color: #121212; /* Fondo negro */

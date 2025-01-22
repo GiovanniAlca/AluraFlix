@@ -12,7 +12,7 @@ const FooterContainer = styled.footer`
 `;
 
 const Footer = () => {
-  return <FooterContainer>&copy; 2025 Aluraflix</FooterContainer>;
+  return <FooterContainer>Desarrollado por Giovanni Alca</FooterContainer>;
 };
 
 export default Footer;

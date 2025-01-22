@@ -7,7 +7,7 @@ import Category from './components/Category';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import AddVideo from './pages/AddVideo';
-import data from '../public/data/bd.json';  // Importa el archivo JSON directamente
+import data from '/public/data/bd.json';  // Importa el archivo JSON directamente
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring'; // Para la animación del carrusel
 
 // Puedes cargar tu JSON desde un archivo local o API
-import bdData from '../../../public/data/bd.json'; // Asumiendo que este es el archivo JSON con los datos
+import bdData from '/public/data/bd.json'; // Asumiendo que este es el archivo JSON con los datos
 
 const BannerContainer = styled.div`
   position: relative;
