@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 import Modal from '../components/Modal/Modal';
 
 const Home = ({ categories }) => {
-  console.log('Categorías recibidas:', categories); // Verifica qué contiene categories
   
   return (
     <>

@@ -49,7 +49,7 @@ const Category = ({ category }) => {
     fetch('/data/bd.json') // Asegúrate de que la ruta es correcta
       .then((response) => response.json())
       .then((data) => {
-        console.log('Datos cargados:', data); // Verifica los datos cargados
+        //console.log('Datos cargados:', data); // Verifica los datos cargados
         setVideoData(data);
       })
       .catch((error) => {
