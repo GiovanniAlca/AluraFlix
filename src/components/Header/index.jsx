@@ -52,8 +52,9 @@ const NavLinks = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  background-color: #1e90ff;
+  background-color: transparent;
   padding: 10px 20px;
+  border: #c72323 solid;
   color: white;
   text-decoration: none; /* Elimina el subrayado del enlace */
   border-radius: 5px;
@@ -61,7 +62,7 @@ const StyledLink = styled(Link)`
   cursor: pointer;
 
   &:hover {
-    background-color: #00bfff;
+    background-color: #c72323;
   }
 
   /* Ajustes de tamaño de fuente y padding en pantallas pequeñas */
