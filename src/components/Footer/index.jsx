@@ -8,7 +8,7 @@ const FooterContainer = styled.footer`
   text-align: center;
   padding: 20px;
   box-shadow: 5px 5px 20px rgba(255, 0, 0, 0.762); /* Sombra de color rojo */
-  border-bottom: 2px solid #651415; /* Borde inferior rojo brillante */
+ /* Borde inferior rojo brillante */
 `;
 
 const Footer = () => {
