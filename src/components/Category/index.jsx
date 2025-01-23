@@ -20,8 +20,7 @@ const CategoryTitle = styled.h2`
   margin: 0;
   text-align: center;
   width: 300px;
-  border-radius: 10px;
-  background-color: blue;  /* Solo para ver si se está renderizando */
+  border-radius: 10px;  /* Solo para ver si se está renderizando */
 `;
 
 
