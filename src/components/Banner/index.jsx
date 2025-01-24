@@ -53,8 +53,8 @@ const ContenedorVideo = styled.div`
   border-radius: 20px;
   margin: 10px;
   width: 100%;
-  max-width: 700px;
-  height: 400px;
+  width: 550px;
+    height: 300px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -62,8 +62,8 @@ const ContenedorVideo = styled.div`
   object-fit: cover;
   
   img {
-    width: 600px;
-    height: 340px;
+    width: 550px;
+    height: 300px;
     object-fit: cover;
     border-radius: 15px;
     border: 3px solid ${({ category }) => categoryBackground(category)};
@@ -73,7 +73,11 @@ const ContenedorVideo = styled.div`
   @media (max-width: 768px) {
     width: 300px;
     height: 200px;
+    img {
+    width: 280px;
+    height: 150px;
   }
+}
 `;
 
 const CategoryBadge = styled.span`
@@ -162,17 +166,9 @@ const Banner = () => {
     from: { opacity: 0, transform: 'translateX(100%)' },
     enter: { opacity: 1, transform: 'translateX(0%) ' },
     leave: { opacity: 0, transform: 'translateX(-100%) ' },
-    config: { tension: 200, friction: 40, duration: 500 },
+    config: { tension: 700, friction: 500, duration: 1000 },
   });
 
-  // Transiciones para el background
-  const backgroundTransitions = useTransition(currentIndex, {
-    key: currentIndex,
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 3000 }, // Configura la duración a tu gusto
-  });
 
   const video = videos[currentIndex]?.videos[1];
   const videoId = video ? video.video.split('/')[4] : '';
@@ -180,9 +176,8 @@ const Banner = () => {
 
   return (
     <BannerContainer>
-      {backgroundTransitions((style) => (
-        <BackgroundImage style={style} backgroundImage={thumbnailUrl} />
-      ))}
+        <BackgroundImage  backgroundImage={thumbnailUrl} />
+
       
       <VideoDescription>
           <animated.div >
