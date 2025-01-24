@@ -33,6 +33,7 @@ const HeaderContainer = styled.header`
 
 const Logo = styled.div`
   font-size: 2rem;
+  font-family: 'Poppins', sans-serif;
 
   /* Reducir el tamaño de la fuente en pantallas pequeñas */
   @media (max-width: 768px) {
@@ -75,7 +76,7 @@ const StyledLink = styled(Link)`
 const Header = () => {
   return (
     <HeaderContainer>
-      <Logo>Aluraflix</Logo>
+      <Logo>AluraFlix</Logo>
       <NavLinks>
         {/* Enlace a la página de inicio */}
         <StyledLink to="/">Home</StyledLink>

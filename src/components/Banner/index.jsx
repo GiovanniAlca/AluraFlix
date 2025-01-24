@@ -160,15 +160,19 @@ const Banner = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
   };
 
-  // Transiciones para los videos
   const transitions = useTransition(currentIndex, {
     key: currentIndex,
     from: { opacity: 0, transform: 'translateX(100%)' },
-    enter: { opacity: 1, transform: 'translateX(0%) ' },
-    leave: { opacity: 0, transform: 'translateX(-100%) ' },
-    config: { tension: 700, friction: 500, duration: 1000 },
+    enter: { opacity: 1, transform: 'translateX(0%)' },
+    leave: { opacity: 0, transform: 'translateX(-100%)' },
+    config: {
+      tension: 700,
+      friction: 500,
+      duration: window.innerWidth <= 768 ? 500 : 1000, // Ajusta la duración según el tamaño de la pantalla
+    },
   });
-
+  
+  
 
   const video = videos[currentIndex]?.videos[1];
   const videoId = video ? video.video.split('/')[4] : '';
