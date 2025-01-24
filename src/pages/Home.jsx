@@ -4,6 +4,7 @@ import Banner from '../components/Banner';
 import Category from '../components/Category';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal/Modal';
+import ModalVideo from '../components/ModalVideo';
 
 const Home = ({ categories }) => {
   
@@ -25,6 +26,7 @@ const Home = ({ categories }) => {
 
       {/* Modal */}
       <Modal categories={categories} />
+      <ModalVideo categories={categories}></ModalVideo>
     </>
   );
 };

@@ -124,17 +124,11 @@ const Modal = ({
   const [videoUrl, setVideoUrl] = useState(video.video || "");
 
   useEffect(() => {
-    console.log("Categories passed:", categories); // Verifica las categorías
-    console.log("Current category:", categoria); // Verifica la categoría actual
-  
-    if (!categoria && categories.length > 0 && video.categoria) {
-      setCategoria(video.categoria);
-      console.log("Asignando categoría del video:", video.categoria);
-    } else if (!categoria && categories.length > 0) {
-      setCategoria(categories[0].categoria || categories[0]);
-      console.log("Asignando categoría por defecto:", categories[0].categoria || categories[0]);
+    console.log('Categorías disponibles:', categories);
+    if (!categoria && categories.length > 0) {
+      setCategoria(video.categoria || categories[0].categoria);
     }
-  }, [categories, categoria, video.categoria]);
+  }, [categories, video.categoria, categoria]);
   
   
   const handleInputChange = (e, setter) => {
@@ -201,13 +195,14 @@ const Modal = ({
   {categories.length > 0 ? (
     categories.map((cat, index) => (
       <option key={index} value={cat.categoria || cat}>
-        {cat.categoria || cat} {/* Asegúrate de acceder correctamente a la propiedad */}
+        {cat.categoria || cat}
       </option>
     ))
   ) : (
     <option value="">No hay categorías disponibles</option>
   )}
 </select>
+
               <InputLabel>Descripción</InputLabel>
               <TextArea
                 value={descripcion}
