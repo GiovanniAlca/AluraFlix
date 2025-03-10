@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 // Estilos del modal
@@ -108,6 +108,9 @@ const ActionButton = styled.button`
   }
 `;
 
+
+
+
 const Modal = ({
   isOpen,
   onClose,
@@ -118,18 +121,24 @@ const Modal = ({
   onUpdate,
 }) => {
   const [titulo, setTitulo] = useState(video.titulo || "");
-  const [categoria, setCategoria] = useState(video.categoria || "");
+  const [categoria, setCategoria] = useState(video.categoria || ""); // Asegúrate de que no sea "default"
   const [descripcion, setDescripcion] = useState(video.descripcion || "");
   const [imagen, setImagen] = useState(video.imagen || "");
   const [videoUrl, setVideoUrl] = useState(video.video || "");
 
   useEffect(() => {
-    console.log('Categorías disponibles:', categories);
-    if (!categoria && categories.length > 0) {
-      setCategoria(video.categoria || categories[0].categoria);
+    if (video.categoria) {
+      console.log("Categoria del video:", video.categoria); // Verifica que la categoría esté llegando correctamente
+      setCategoria(video.categoria);
     }
-  }, [categories, video.categoria, categoria]);
+  }, [video]);
+
+
   
+  
+  
+  console.log('Categoria seleccionada:', categoria);
+
   
   const handleInputChange = (e, setter) => {
     setter(e.target.value);
@@ -146,20 +155,33 @@ const Modal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
-    // Agregar el console.log aquí para ver la categoría seleccionada
+  
     console.log("Categoria seleccionada al actualizar:", categoria);
-
+  
     try {
       if (action === "Actualizar") {
-        onUpdate({ titulo, categoria, descripcion, imagen, videoUrl });
+        if (typeof onUpdate === "function") {
+          onUpdate({ titulo, categoria, descripcion, imagen, videoUrl });
+        } else {
+          console.error("onUpdate is not a function");
+        }
       } else if (action === "Eliminar") {
-        onDelete(video.id);
+        if (typeof onDelete === "function") {
+          onDelete(video.id);
+        } else {
+          console.error("onDelete is not a function");
+        }
       }
     } catch (error) {
       console.error("Error al actualizar/eliminar:", error);
     }
   };
+  
+  const handleSave = () => {
+    // Example of what you might do when updating the video
+    const updatedVideo = { ...video, newTitle: "Updated Title" };  // Update the video data
+    onUpdate(updatedVideo);  // Call the onUpdate function passed as a prop
+  };  
 
 
   if (!isOpen) return null;
@@ -181,14 +203,18 @@ const Modal = ({
               <InputLabel>Seleccionar Categoría</InputLabel>
               <select
   value={categoria || ""}
-  onChange={(e) => handleInputChange(e, setCategoria)}
+  onChange={(e) => {
+    const newCategoria = e.target.value;
+    setCategoria(newCategoria);
+    console.log("Categoria seleccionada:", newCategoria); // Verifica el valor seleccionado
+  }}
   style={{
     width: "100%",
     padding: "10px",
     marginBottom: "15px",
-    border: "1px solid #be3a3a",
+    border: categoria ? "1px solid #be3a3a" : "1px solid #4a90e2",
     backgroundColor: "black",
-    color: "white"
+    color: "white",
   }}
 >
   <option value="">Seleccione una categoría</option>
@@ -214,7 +240,19 @@ const Modal = ({
                 onChange={(e) => handleInputChange(e, setImagen)}
                 type="text"
               />
-              {imagen && <img src={imagen} alt="thumbnail" style={{ width: "100%", height: "auto" , marginTop: "10px" }} />}
+              {imagen && (
+  <img 
+    src={imagen} 
+    alt="thumbnail" 
+    style={{ 
+      width: "100%", 
+      marginTop: "10px", 
+      display: "block", 
+      marginLeft: "auto", 
+      marginRight: "auto" 
+    }} 
+  />
+)}
               <InputLabel>Video URL</InputLabel>
               <InputField
                 value={videoUrl}
@@ -226,11 +264,16 @@ const Modal = ({
     width="100%"
     height="315"
     src={videoUrl}
-    frameBorder="0"
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
     allowFullScreen
+    style={{
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto"
+    }}
   ></iframe>
 )}
+
 
 
             </>

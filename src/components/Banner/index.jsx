@@ -4,7 +4,7 @@ import { useTransition, animated } from 'react-spring';
 import bdData from '/public/data/bd.json';
 
 const BannerContainer = styled.div`
-  position: relative;
+  position: relative; /* Cambio aquí */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,26 +20,40 @@ const BannerContainer = styled.div`
   }
 `;
 
+const ContenedorDescripcion = styled.div`
+  position: absolute; /* Cambio de fixed a absolute */
+  top: 35%; /* Ajusta la posición según lo necesites */
+  left: 200px; /* Puedes ajustar esto para moverlo más a la izquierda o derecha */
+  width: 300px; /* Ajusta el tamaño si es necesario */
+  color: white;
+
+  @media (max-width: 768px) {
+    left: 30px;
+    top: 60%;
+  }
+`;
+
+
+
 const BackgroundImage = styled.div`
   position: absolute;
   inset: 0;
   background-image: ${({ backgroundImage }) => `url(${backgroundImage})`};
   background-size: cover;
   background-position: center;
-  filter: blur(8px);
+  filter: blur(10px);
   z-index: 0;
 `;
 
 const VideoDescription = styled.div`
   z-index: 2;
   flex: 1 1 0%;
-  margin-left: 50px;
-  margin-right: 50px;
 
   @media (max-width: 768px) {
     width: 300px;
     height: 200px;
     text-align: center;
+    justify-content: centers;
   }
 `;
 
@@ -47,34 +61,34 @@ const ContenedorCarrusel = styled.div`
   z-index: 2;
   display: flex;
   width: max-content;
+  align-items: center;
 `;
 
 const ContenedorVideo = styled.div`
+  display: flex;
   border-radius: 20px;
   margin: 10px;
-  width: 100%;
   width: 550px;
-    height: 300px;
+  height: 300px;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   object-fit: cover;
   
   img {
     width: 550px;
     height: 300px;
     object-fit: cover;
-    border-radius: 15px;
-    border: 3px solid ${({ category }) => categoryBackground(category)};
+    border-radius: 25px;
+    border: 5px solid ${({ category }) => categoryBackground(category)};
   box-shadow: 0 4px 15px ${({ category }) => categoryBackground(category)};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     width: 300px;
     height: 200px;
+    left: 100px;
     img {
-    width: 280px;
+    width: 100%;
     height: 150px;
   }
 }
@@ -125,6 +139,8 @@ const Descripcion = styled.h3`
   }
 `;
 
+
+
 const categoryBackground = (category) => {
   const backgrounds = {
     "Kevin Karl": "#38461e",
@@ -166,8 +182,8 @@ const Banner = () => {
     enter: { opacity: 1, transform: 'translateX(0%)' },
     leave: { opacity: 0, transform: 'translateX(-100%)' },
     config: {
-      tension: 700,
-      friction: 500,
+      tension: 10000,
+      friction: 50,
       duration: window.innerWidth <= 768 ? 500 : 1000, // Ajusta la duración según el tamaño de la pantalla
     },
   });
@@ -184,6 +200,7 @@ const Banner = () => {
 
       
       <VideoDescription>
+        <ContenedorDescripcion>
           <animated.div >
             <CategoryBadge category={videos[currentIndex]?.categoria}>
               {videos[currentIndex]?.categoria}
@@ -191,6 +208,7 @@ const Banner = () => {
             <ArtistName>{video?.titulo}</ArtistName>
             <Descripcion>{video?.descripcion}</Descripcion>
           </animated.div>
+        </ContenedorDescripcion>
       </VideoDescription>
 
       <ContenedorCarrusel>

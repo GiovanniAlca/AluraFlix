@@ -43,12 +43,12 @@ const Logo = styled.div`
 
 const NavLinks = styled.div`
   display: flex;
-  gap: 10px; /* Espaciado entre los botones */
+  gap: 20px; /* Espaciado entre los botones */
 
   /* Adaptación a pantallas pequeñas */
   @media (max-width: 768px) {
     flex-direction: row; /* Colocar los enlaces en columna */
-    gap: 5px; /* Reducir el espaciado entre los botones */
+    gap: 10px; /* Reducir el espaciado entre los botones */
   }
 `;
 
@@ -58,7 +58,7 @@ const StyledLink = styled(Link)`
   border: #c72323 solid;
   color: white;
   text-decoration: none; /* Elimina el subrayado del enlace */
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
 

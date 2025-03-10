@@ -60,7 +60,6 @@ const ModalVideo = ({ isOpen, onClose, video={} }) => {
             width="100%"
             height="315"
             src={video.video}
-            frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             onLoad={() => setLoading(false)} // Ocultar loader al cargar

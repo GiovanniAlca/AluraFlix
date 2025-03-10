@@ -1,34 +1,37 @@
-// Importar Express y CORS
 const express = require('express');
-const cors = require('cors');  // Importa el middleware de CORS
+const fs = require('fs');
 const app = express();
 const port = 5000;
 
-// Usar CORS para permitir solicitudes desde cualquier origen
-app.use(cors());  // Este código permite CORS para todas las rutas y orígenes.
+app.use(express.json()); // Permite trabajar con JSON en las solicitudes
 
-// Si necesitas configuraciones específicas de CORS, puedes hacerlo así:
-// app.use(cors({
-//   origin: 'http://localhost:3000',  // Permite solo solicitudes desde este origen
-// }));
+app.post('/update-video', (req, res) => {
+  const { video } = req.body;  // Video actualizado recibido en el cuerpo de la solicitud
 
-// Middleware para manejar JSON en el cuerpo de las solicitudes
-app.use(express.json());
+  // Leer el archivo bd.json
+  fs.readFile('./public/data/bd.json', (err, data) => {
+    if (err) {
+      return res.status(500).send('Error al leer el archivo');
+    }
 
-// Definir la ruta que maneja la solicitud POST
-app.post('/add-video', (req, res) => {
-  const { category, imageUrl, videoUrl, description } = req.body;
-  
-  // Verificación simple para asegurarse de que los datos estén completos
-  if (!category || !imageUrl || !videoUrl || !description) {
-    return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
-  }
+    let videos = JSON.parse(data);  // Convertir el JSON en un objeto
 
-  // Aquí podrías procesar los datos (por ejemplo, guardarlos en la base de datos)
-  res.status(200).json({ message: 'Video agregado con éxito' });
+    // Aquí debes encontrar y actualizar el video que coincide con el ID o algún campo único
+    const videoIndex = videos.findIndex((v) => v.videoUrl === video.videoUrl);
+    if (videoIndex >= 0) {
+      videos[videoIndex] = video;  // Actualizar el video
+    }
+
+    // Guardar el archivo con los cambios
+    fs.writeFile('./public/data/bd.json', JSON.stringify(videos, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send('Error al escribir el archivo');
+      }
+      res.send('Video actualizado con éxito');
+    });
+  });
 });
 
-// Arrancar el servidor
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });

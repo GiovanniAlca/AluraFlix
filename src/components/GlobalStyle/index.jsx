@@ -10,8 +10,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Arial', sans-serif;
-    background-color: #130809;
-    color: #333;
+    background-color: #000000;
+    color: #000000;
     min-height: 100vh; /* Asegura que el body ocupe al menos el 100% de la altura de la pantalla */
     display: flex;
     flex-direction: column; /* Aplica un diseño de columna */
