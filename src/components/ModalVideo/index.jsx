@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-// Estilos para el modal
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -13,13 +12,12 @@ const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  pointer-events: all;
 `;
 
 const ModalContent = styled.div`
   background: #000000;
   padding: 30px;
-  border: solid white;
+  border: 3px solid ${({ categoryColor }) => categoryColor || "#2c3e50"};
   border-radius: 10px;
   width: 80%;
   max-width: 800px;
@@ -36,38 +34,53 @@ const CloseButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  color: #333;
+  color: white;
 
   &:hover {
     color: #be3a3a;
   }
 `;
 
-const ModalVideo = ({ isOpen, onClose, video={} }) => {
-    if (!isOpen) return null;
+const ModalVideo = ({ isOpen, onClose, video = {}, categoryColor }) => {
+  // ✅ useState SIEMPRE debe ejecutarse, incluso si el modal está cerrado.
+  const [loading, setLoading] = useState(true);
 
-    // Imprimir el valor de video.video para depuración
-    console.log('video.video:', video.video);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
-    const [loading, setLoading] = useState(true);
+  if (!isOpen) return null; // ✅ Ahora todos los hooks se ejecutan antes de este return.
 
-    return (
-      <ModalOverlay onClick={onClose}>
-        <ModalContent onClick={(e) => e.stopPropagation()}>
-          <CloseButton onClick={onClose}>&times;</CloseButton>
-          {loading && <p style={{ color: 'white' }}>Cargando...</p>}
+  const videoSrc = video.video || ""; // Asegurar que no sea undefined
+  console.log("URL del video:", videoSrc);
+
+  return (
+    <ModalOverlay>
+      <ModalContent categoryColor={categoryColor}>
+        <CloseButton onClick={onClose}>&times;</CloseButton>
+        {loading && <p style={{ color: "white" }}>Cargando...</p>}
+        {videoSrc ? (
           <iframe
             width="100%"
-            height="315"
-            src={video.video}
+            height="380"
+            src={videoSrc}
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            onLoad={() => setLoading(false)} // Ocultar loader al cargar
+            onLoad={() => setLoading(false)}
           ></iframe>
-        </ModalContent>
-      </ModalOverlay>
-    );
+        ) : (
+          <p style={{ color: "red" }}>Error: No se pudo cargar el video.</p>
+        )}
+      </ModalContent>
+    </ModalOverlay>
+  );
 };
-
 
 export default ModalVideo;

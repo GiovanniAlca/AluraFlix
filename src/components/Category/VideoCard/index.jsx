@@ -78,7 +78,7 @@ const VideoCard = ({ video, categoryColor }) => {
         </ButtonContainer>
       </CardContainer>
       <Modal isOpen={isModalOpen} onClose={closeModal} video={videoState} action={modalAction} categories={categories} onUpdate={handleUpdate} />
-      <ModalVideo isOpen={isVideoModalOpen} onClose={closeVideoModal} video={videoState} onUpdate={handleUpdate} />
+      <ModalVideo isOpen={isVideoModalOpen} onClose={closeVideoModal} video={videoState} onUpdate={handleUpdate} categoryColor={categoryColor}/>
     </>
   );
 };

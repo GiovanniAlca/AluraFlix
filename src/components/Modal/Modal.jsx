@@ -184,10 +184,21 @@ const Modal = ({
   };  
 
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null; // ✅ Ahora todos los hooks se ejecutan antes de este return.
 
   return (
-    <ModalOverlay onClick={onClose}>
+    <ModalOverlay >
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose}>&times;</CloseButton>
         <H2>{action === "Actualizar" ? "Actualizar Video" : "Eliminar Video"}</H2>
